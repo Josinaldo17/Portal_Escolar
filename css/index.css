@@ -1,0 +1,91 @@
+header {
+    position: fixed;
+    width: 100%;
+    
+}
+
+
+/*--------------------------------------- MAIN ----------------------------------------------------------*/
+
+main{
+    padding: 10%;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: aqua;
+}
+
+/*--------------- DIV DE PESQUISA ---------------------*/
+
+.div-seach{
+    background-color: red;
+}
+
+.div-seach .col-lg{
+    flex-direction: row;        
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    align-items: center;
+
+
+}
+
+.div-input {
+    display: flex;
+    width: 60%;
+    height: 50px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 2px;
+}
+
+
+.div-btn-filtro{
+    width: 15%;
+    height: 50px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 2px;
+
+
+}
+
+
+.div-input button {
+    background-color: red;
+}
+
+
+
+/*--------------- DIV DE PRINCIPAL ---------------------*/
+ 
+.div-main{
+    
+    background-color: rgb(0, 110, 255);
+    align-items: center;
+    height: 100%;
+
+}
+
+.div-main .col-lg{
+    flex-direction: row;        
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+
+
+}
+
+.div-main img{
+    margin: auto;
+    height: 75%;
+}
+
