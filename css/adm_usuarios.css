@@ -1,0 +1,198 @@
+@import url(padroes.css);
+
+body{
+    font-style: oblique;    
+    font-weight: bold;
+}
+
+
+header {
+    position: fixed;
+    width: 100%;
+    font-size: 18px;
+}
+header li{
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.navbar  {
+    background-color: var(--cor-principal);
+}
+
+.bg-body-tertiary {
+    background-color: var(--cor-principal) !important;
+    color: var(--cor-branco) !important;
+}
+
+.nav-link{
+    color: var(--cor-branco) !important;
+
+}
+.active{
+    color: var(--cor-roxo) !important;
+
+}
+
+.navbar-toggler {
+    border-color: var(--cor-principal);
+    border: solid 1px var(--cor-branco);
+}
+
+
+/*--------------------------------------- MAIN ----------------------------------------------------------*/
+main {
+    padding-top: 12vh;
+    padding-bottom: 10%;
+    padding-left: 15%;
+    padding-right: 15%;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: var(--cor-branco)
+}
+
+/*--------------- DIV DE PESQUISA ---------------------*/
+
+.div-seach {
+    /* background-color: red;-*/
+    height: 20%;
+    margin-bottom: 30px;
+}
+
+.div-seach h1{
+    font-size: 60px;
+    margin: auto;
+    color:  var(--cor-principal);
+}
+
+.div-input.inputpesquisa {
+    background-color: var(--cor-branco);
+    display: flex;
+    width: 8000%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: var(--cor-principal);
+}
+
+.div-seach .col-lg{
+    margin: auto;
+}
+
+.div-seach .col-lg{
+    flex-direction: row;        
+    display: flex;
+    flex-direction: row; 
+    gap: 10px;
+    align-items: center;
+
+
+}
+
+.div-input {
+    display: flex;
+    width: 60%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: var(--cor-principal);
+    background-color: var(--cor-branco);
+
+}
+
+.div-input input {
+  background: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  color: inherit;
+    
+}
+
+
+.div-btn-filtro {
+    width: 15%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: var(--cor-principal);
+    background-color: var(--cor-branco);
+
+}
+
+
+.div-input button {
+    background-color: var(--cor-secundaria);
+}
+
+
+
+/*--------------- DIV DE PRINCIPAL ---------------------*/
+.div-main {
+    padding: 1%;
+    background-color: var(--cor-branco);
+    align-items: center;
+    height: 90%;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: var(--cor-principal);
+}
+
+.div-main .col-lg{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+
+}
+
+.div-main .col-lg img {
+    margin: auto;
+    width: 90%;
+    padding: 40px,40px,40px,40px;
+ }
+
+.div-mostrar-usuarios {
+    display: inline;
+
+}
+
+ 
+.div-mostrar-usuarios {
+    display: flex;
+    padding-top: 20px;
+    overflow-y: auto;
+    height: 50vh;
+    flex-direction:column; 
+
+    
+
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+
+.div-mostrar-usuarios::-webkit-scrollbar {
+  display: none; 
+}
+
+.div-dados-usuarios {
+    padding: 40px;
+    width: 90%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 3px;
+    border-color: var(--cor-principal);
+}

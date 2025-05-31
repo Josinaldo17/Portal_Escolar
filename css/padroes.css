@@ -1,0 +1,8 @@
+/* Variaveis Padroes que vao ser usadas varais vezes */
+
+:root {
+    --cor-branco: #ffff;
+    --cor-principal: #1f5692;
+    --cor-secundaria: #e1efff;
+    --cor-roxo: #d838f2;
+}

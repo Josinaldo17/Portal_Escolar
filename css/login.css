@@ -1,0 +1,139 @@
+@import url(padroes.css);
+
+/* * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+} */
+.root {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--cor-secundaria);
+    justify-content: space-between;
+}
+
+.container-left {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to top, var(--cor-branco), #c5daf3, #9aabc0, #839cb8);
+    justify-content: center;
+    align-items: center;
+}
+
+.container-left img {
+    height: 75%;
+    margin: auto;
+} 
+
+.container-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 60em;
+    background-color: var(--cor-branco);
+}
+
+.form-container h1 {
+    color: var(--cor-principal);
+    font-family: var(--Staat);
+    text-align: center;
+    margin-bottom: 2em;
+}
+
+.form-contol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    width: 20em;
+    height: 10em;
+}
+
+/* .form-contol p {
+    color: #000;
+    font-size: 1.2em;
+    font-weight: bold;
+} */
+
+
+.div-input {
+    display: flex;
+    width: 100%;
+    padding: 0 1em;
+    height: 4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border: solid 3px;
+    margin-top: 2em;
+    margin-bottom: 1em;
+    border-color: var(--cor-principal);
+    background-color: var(--cor-branco);
+
+}
+
+.div-input input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  color: inherit !important;
+    
+}
+
+
+.form-container input::placeholder {
+    font-family: var(--novo);
+    color: var(--cor-roxo);
+}
+
+.form-container p {
+    font-family: var(--novo);
+    text-align: left;
+}
+
+.forgot-container {
+    text-align: right;
+    font-family: var(--novo);
+    text-decoration: none; 
+    color: #000;
+}
+.container-right a{
+    color: var(--cor-roxo);
+    text-decoration: none; 
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+b{
+    size: 1px;
+}
+
+.button-container button {
+    color: var(--cor-branco);
+    font-weight: bold;
+    font-family:  var(--novo);
+    font-size: 2em;
+    background-color: var(--cor-principal);
+    width: 80%;
+    height: 1.6em;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 1em;
+}
+
+.register-account {
+    display: flex;
+    margin-top: 2em;
+    justify-content: center;
+    align-items: center;
+} 
