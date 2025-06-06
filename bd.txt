@@ -1,0 +1,59 @@
+Usuarios 
+matricula  primary
+tipo deful A
+status  deful  A 
+
+Responsaveis
+matricula_usuario  primary forykey
+telefone
+nome 
+nas
+cpf
+
+Alunos
+matricula_usuario  primary   forykey
+telefone
+nome 
+nas
+cpf
+id_sala  forykey
+id_responsavel   forykey
+
+Professores
+matricula_usuario  primary forykey
+telefone
+nome 
+nas
+cpf
+
+
+Disciplinas
+id   primary
+nome
+
+Turmas
+id  primary key
+id_disciplinas forykey
+id_professor forykey
+id_salas forykey
+periodo ano
+status
+
+Salas
+id  primary  
+status
+nome
+
+Notas
+id  primary  
+id_disciplinas forykey
+id_alunos forykey
+n1
+n2
+n3
+n4
+nr
+nf
+status
+
+
