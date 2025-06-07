@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cadastro_turmas.css">
+    <title>Gerenciamento de turma</title>
+</head>
+<body>
+    <div class="container">
+        <img src="../img/imagem5.svg">
+    </div>
+    <div class="form">
+        <form action="php/turma.php" method="POST">
+            <div class="form-header">
+                <div class="title">
+                    <h1>Turma</h1>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-box">
+                    <label for="number">Sala</label>
+                    <input id="number" type="number" name="number" placeholder="Digite o numero da sala" class="inputs required" oninput="numberValidate()">
+                    <span class="span-required">Numero da sala deve ter no mínimo 3 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Nome da Sala</label>
+                    <input id="name" name="nsala" type="text" placeholder="Digite o nome da sala" class="inputs required" oninput="nameValidate()">
+                    <span class="span-required">Nome da sala deve ter no mínimo 3 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Professor</label>
+                    <input id="name" type="text" name="nprofessor"  placeholder="Nome do professor" class="inputs required" oninput="name1Validate()">
+                    <span class="span-required">Nome do professor deve ter no mínimo 3 caracteres</span>
+                </div>
+                
+              
+            </div>
+    
+            <div class="continue-button">
+                        <input type="submit" value="Enviar">
+             </div>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById('form');
+    const campos = document.querySelectorAll('.required');
+    const spans = document.querySelectorAll('.span-required');
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        numberValidate();
+        nameValidate();
+        name1Validate();
+    });
+
+    function setError(index) {
+        campos[index].style.border = '2px solid #e63636';
+        spans[index].style.display = 'block';
+    }
+    function removeError(index) {
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+
+    function numberValidate() {
+        if (campos[0].value.length < 3) {
+            setError(0);
+        }
+        else {
+            removeError(0);
+        }
+    }
+
+    function nameValidate() {
+        if (campos[1].value.length < 3) {
+            setError(1);
+        }
+        else {
+            removeError(1);
+        }
+    }
+
+    function name1Validate() {
+        if (campos[2].value.length < 3) {
+            setError(2);
+        }
+        else {
+            removeError(2);
+        }
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/cadastro_notas.css">
+    <title>Lançamento de notas</title>
+</head>
+<body>
+    <div class="container">
+        <img src="../img/imagem6.svg">
+    </div>
+    <div class="form">
+        <form action="../php/notas.php" method="POST">
+            <div class="form-header">
+                <div class="title">
+                    <h1>Notas</h1>
+
+                </div>
+            </div>
+            <div class="input-group">
+
+                <div class="input-box">
+                    <label for="name">Nota1</label>
+                    <input id="name" type="text" placeholder="Digite a primeira nota" class="inputs required" oninput="name0Validate()">
+                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Nota2</label>
+                    <input id="name" type="text" placeholder="Digite a segunda nota" class="inputs required" oninput="name1Validate()">
+                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Nota3</label>
+                    <input id="name" type="text" placeholder="Digite a terceira nota" class="inputs required" oninput="name2Validate()">
+                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Nota4</label>
+                    <input id="name" type="text" placeholder="Digite a quarta nota" class="inputs required" oninput="name3Validate()">
+                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
+                </div>
+                <div class="input-box">
+                    <label for="name">Média</label>
+                    <input id="name" type="text" placeholder="Digite a média" class="inputs required" oninput="name4Validate()">
+                    <span class="span-required">Média deve ter no mínimo 2 caracteres</span>
+                </div>
+
+
+            </div>
+
+            <div class="continue-button">
+                <input type="submit" value="Enviar">
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+    const form = document.getElementById('form');
+    const campos = document.querySelectorAll('.required');
+    const spans = document.querySelectorAll('.span-required');
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        name0Validate();
+        name1Validate();
+        name2Validate();
+        name3Validate();
+        name4Validate();
+    });
+
+    function setError(index) {
+        campos[index].style.border = '2px solid #e63636';
+        spans[index].style.display = 'block';
+    }
+    function removeError(index) {
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+
+    function name0Validate() {
+        if (campos[0].value.length < 2) {
+            setError(0);
+        }
+        else {
+            removeError(0);
+        }
+    }
+
+    function name1Validate() {
+        if (campos[1].value.length < 2) {
+            setError(1);
+        }
+        else {
+            removeError(1);
+        }
+    }
+    function name2Validate() {
+        if (campos[2].value.length < 2) {
+            setError(2);
+        }
+        else {
+            removeError(2);
+        }
+    }
+    function name3Validate() {
+        if (campos[3].value.length < 2) {
+            setError(3);
+        }
+        else {
+            removeError(3);
+        }
+    }
+    function name4Validate() {
+        if (campos[4].value.length < 2) {
+            setError(4);
+        }
+        else {
+            removeError(4);
+        }
+    }
+
+</script>
+</html>
