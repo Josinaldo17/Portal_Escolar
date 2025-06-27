@@ -58,6 +58,17 @@
     font-size: 1.2em;
     font-weight: bold;
 } */
+.alert {
+    position: fixed;
+    top: 20px;      /* Distância do topo */
+    right: 20px;    /* Distância da direita */
+    z-index: 9999;  /* Fica sempre na frente */
+    width: auto;    /* Largura automática */
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
 
 
 .div-input {

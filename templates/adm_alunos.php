@@ -49,7 +49,7 @@ try {
 
                      <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="../templates/adm_home">Home</a>
+                            <a class="nav-link" href="../templates/adm_home.php">Home</a>
                         </li>
 
                         <li class="nav-item">

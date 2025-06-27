@@ -49,7 +49,7 @@ try {
 
                      <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="../templates/adm_home">Home</a>
+                            <a class="nav-link" href="../templates/adm_home.php">Home</a>
                         </li>
 
                         <li class="nav-item">
@@ -153,6 +153,15 @@ try {
                         </div>
 
                         <div>
+                            <button class="btn" data-bs-toggle="modal" data-bs-target="#modalEdicao"
+                                data-matricula="<?= $aluno['matricula_usuario'] ?>"
+                                data-nome="<?= htmlspecialchars($aluno['nome']) ?>"
+                                data-telefone="<?= htmlspecialchars($aluno['telefone']) ?>"
+                                data-cpf="<?= htmlspecialchars($aluno['cpf']) ?>"
+                                data-nas="<?= htmlspecialchars($aluno['nas']) ?>">
+
+                                
+                                <!-- Ícone -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="col ml-auto" viewBox="0 0 16 16">
                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
@@ -173,7 +182,44 @@ try {
 
      
     </main>
+<!-- Modal com o formulário conectado ao PHP -->
+            <div class="modal fade" id="modalEdicao" tabindex="-1" aria-labelledby="modalEdicaoLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Enviando dados para salvar_dados.php -->
+                    <form method="POST" action="../php/editar_aluno.php">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEdicaoLabel">Editar informações de responsaveis</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" a   ria-label="Fechar"></button>
+                    </div>
+                    <input type="hidden" id="matricula" name="matricula">
 
+                    <div class="modal-body">
+                        <div class="mb-3">
+                        <label for="number" class="form-label">Telefone</label>
+                        <input type="number" class="form-control" id="number" name="number" required>
+                        </div>
+                        <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" required>
+                        </div>
+                        <div class="mb-3">
+                        <label for="nas" class="form-label">Nascimento</label>
+                        <input type="data" class="form-control" id="nas" name="nas" required>
+                        </div>
+                        <div class="mb-3">
+                        <label for="cpf" class="form-label">CPF</label>
+                        <input type="number" class="form-control" id="cpf" name="cpf" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                    </form>
+                </div>
+                </div>
+            </div>
     <!--------------------------------------- FOORTER ---------------------------------------------------------->
 
 
