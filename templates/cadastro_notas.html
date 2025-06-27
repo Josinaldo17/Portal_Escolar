@@ -21,105 +21,47 @@
             <div class="input-group">
 
                 <div class="input-box">
-                    <label for="name">Nota1</label>
-                    <input id="name" type="text" placeholder="Digite a primeira nota" class="inputs required" oninput="name0Validate()">
-                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
-                </div>
-                <div class="input-box">
-                    <label for="name">Nota2</label>
-                    <input id="name" type="text" placeholder="Digite a segunda nota" class="inputs required" oninput="name1Validate()">
-                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
-                </div>
-                <div class="input-box">
-                    <label for="name">Nota3</label>
-                    <input id="name" type="text" placeholder="Digite a terceira nota" class="inputs required" oninput="name2Validate()">
-                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
-                </div>
-                <div class="input-box">
-                    <label for="name">Nota4</label>
-                    <input id="name" type="text" placeholder="Digite a quarta nota" class="inputs required" oninput="name3Validate()">
-                    <span class="span-required">Nota deve ter no mínimo 2 caracteres</span>
-                </div>
-                <div class="input-box">
-                    <label for="name">Média</label>
-                    <input id="name" type="text" placeholder="Digite a média" class="inputs required" oninput="name4Validate()">
-                    <span class="span-required">Média deve ter no mínimo 2 caracteres</span>
-                </div>
+        <label for="nota1">Nota1</label>
+        <input id="nota1" name="nota1" type="text" placeholder="Digite a primeira nota" class="inputs required" oninput="calcularMedia()">
+        </div>
 
+        <div class="input-box">
+        <label for="nota2">Nota2</label>
+        <input id="nota2" name="nota2" type="text" placeholder="Digite a segunda nota" class="inputs required" oninput="calcularMedia()">
+        </div>
 
-            </div>
+        <div class="input-box">
+        <label for="nota3">Nota3</label>
+        <input id="nota3" name="nota3" type="text" placeholder="Digite a terceira nota" class="inputs required" oninput="calcularMedia()">
+        </div>
 
-            <div class="continue-button">
-                <input type="submit" value="Enviar">
-            </div>
+        <div class="input-box">
+        <label for="nota4">Nota4</label>
+        <input id="nota4" name="nota4" type="text" placeholder="Digite a quarta nota" class="inputs required" oninput="calcularMedia()">
+        </div>
+
+        <div class="input-box">
+        <label for="media">Média</label>
+        <input id="media" type="text" placeholder="Média calculada" class="inputs required" readonly>
+        </div>
+        </div>
+
+        <div class="continue-button">
+        <input type="submit" value="Enviar">
+         </div>
+         
         </form>
     </div>
 </body>
 <script>
-    const form = document.getElementById('form');
-    const campos = document.querySelectorAll('.required');
-    const spans = document.querySelectorAll('.span-required');
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    function calcularMedia() {
+        const nota1 = parseFloat(document.getElementById("nota1").value) || 0;
+        const nota2 = parseFloat(document.getElementById("nota2").value) || 0;
+        const nota3 = parseFloat(document.getElementById("nota3").value) || 0;
+        const nota4 = parseFloat(document.getElementById("nota4").value) || 0;
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        name0Validate();
-        name1Validate();
-        name2Validate();
-        name3Validate();
-        name4Validate();
-    });
-
-    function setError(index) {
-        campos[index].style.border = '2px solid #e63636';
-        spans[index].style.display = 'block';
+        const media = (nota1 + nota2 + nota3 + nota4) / 4;
+        document.getElementById("media").value = media.toFixed(2);
     }
-    function removeError(index) {
-        campos[index].style.border = '';
-        spans[index].style.display = 'none';
-    }
-
-    function name0Validate() {
-        if (campos[0].value.length < 2) {
-            setError(0);
-        }
-        else {
-            removeError(0);
-        }
-    }
-
-    function name1Validate() {
-        if (campos[1].value.length < 2) {
-            setError(1);
-        }
-        else {
-            removeError(1);
-        }
-    }
-    function name2Validate() {
-        if (campos[2].value.length < 2) {
-            setError(2);
-        }
-        else {
-            removeError(2);
-        }
-    }
-    function name3Validate() {
-        if (campos[3].value.length < 2) {
-            setError(3);
-        }
-        else {
-            removeError(3);
-        }
-    }
-    function name4Validate() {
-        if (campos[4].value.length < 2) {
-            setError(4);
-        }
-        else {
-            removeError(4);
-        }
-    }
-
 </script>
 </html>

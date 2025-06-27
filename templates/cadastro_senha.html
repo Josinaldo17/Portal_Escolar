@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Senha</title>
+  <link rel="stylesheet" href="../css/cadastro_senha.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Cadastro de Senha</h2>
+    <form id="form-senha" action="../php/senha.php" method="POST">
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required />
+      <div id="forca-senha" class="forca"></div>
+
+      <label for="confirmar-senha">Confirmar Senha:</label>
+      <input type="password" id="confirmar-senha" name="confirmar_senha" required />
+      
+      <input type="submit" value="Cadastrar" />
+      <p id="mensagem-erro" style="color: red; display: none; margin-top: 10px;"></p>
+    </form>
+  </div>
+
+  <script>
+    const senhaInput = document.getElementById("senha");
+    const confirmarInput = document.getElementById("confirmar-senha");
+    const forcaSenha = document.getElementById("forca-senha");
+    const mensagemErro = document.getElementById("mensagem-erro");
+
+    senhaInput.addEventListener("input", function () {
+      const senha = senhaInput.value;
+      let forca = 0;
+
+      if (senha.length >= 6) forca++;
+      if (/[A-Z]/.test(senha)) forca++;
+      if (/[0-9]/.test(senha)) forca++;
+      if (/[^A-Za-z0-9]/.test(senha)) forca++;
+
+      switch (forca) {
+        case 0:
+        case 1:
+          forcaSenha.textContent = "Força: Fraca";
+          forcaSenha.style.color = "red";
+          break;
+        case 2:
+        case 3:
+          forcaSenha.textContent = "Força: Média";
+          forcaSenha.style.color = "orange";
+          break;
+        case 4:
+          forcaSenha.textContent = "Força: Forte";
+          forcaSenha.style.color = "green";
+          break;
+      }
+    });
+
+    document.getElementById("form-senha").addEventListener("submit", function (event) {
+      if (senhaInput.value !== confirmarInput.value) {
+        event.preventDefault();
+        mensagemErro.textContent = "As senhas não coincidem.";
+        mensagemErro.style.display = "block";
+      } else {
+        mensagemErro.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

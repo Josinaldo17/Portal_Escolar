@@ -1,0 +1,304 @@
+CALL criar_aluno('99999-9999', 'Maria Souza', '2012-04-22', '111.222.333-44', 1, 1010);
+
+
+CALL criar_professor(
+    '98888-7777',          -- telefone
+    'João Silva',          -- nome
+    '1980-01-10',          -- data de nascimento (nas)
+    '222.333.444-55'       -- cpf
+);
+
+
+CALL criar_responsavel(
+    '97777-6666',          -- telefone
+    'Ana Paula',           -- nome
+    '1975-09-15',          -- data de nascimento (nas)
+    '333.444.555-66'       -- cpf
+);
+
+
+
+
+====================================================
+
+
+
+
+
+
+
+
+DROP DATABASE IF EXISTS escola;
+CREATE DATABASE escola;
+USE escola;
+
+CREATE TABLE escola.usuarios (
+    matricula INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tipo CHAR(1) DEFAULT 'A',
+    status CHAR(1) DEFAULT 'A'
+) ENGINE=InnoDB AUTO_INCREMENT=1010;
+
+CREATE TABLE escola.responsaveis (
+    matricula_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone VARCHAR(20),
+    nome VARCHAR(100),
+    nas DATE,
+    cpf VARCHAR(14),
+    CONSTRAINT fk_responsavel_usuario FOREIGN KEY (matricula_usuario) REFERENCES escola.usuarios(matricula)
+) ENGINE=InnoDB AUTO_INCREMENT=1010;
+
+CREATE TABLE escola.salas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    status CHAR(1),
+    nome VARCHAR(50)
+) ENGINE=InnoDB;
+
+CREATE TABLE escola.alunos (
+    matricula_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone VARCHAR(20),
+    nome VARCHAR(100),
+    nas DATE,
+    cpf VARCHAR(14),
+    id_sala INT,
+    id_responsavel INT,
+    CONSTRAINT fk_aluno_usuario FOREIGN KEY (matricula_usuario) REFERENCES escola.usuarios(matricula),
+    CONSTRAINT fk_aluno_sala FOREIGN KEY (id_sala) REFERENCES escola.salas(id),
+    CONSTRAINT fk_aluno_responsavel FOREIGN KEY (id_responsavel) REFERENCES escola.responsaveis(matricula_usuario)
+) ENGINE=InnoDB AUTO_INCREMENT=1010;
+
+CREATE TABLE escola.professores (
+    matricula_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    telefone VARCHAR(20),
+    nome VARCHAR(100),
+    nas DATE,
+    cpf VARCHAR(14),
+    CONSTRAINT fk_professor_usuario FOREIGN KEY (matricula_usuario) REFERENCES escola.usuarios(matricula)
+) ENGINE=InnoDB AUTO_INCREMENT=1010;
+
+CREATE TABLE escola.disciplinas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100)
+) ENGINE=InnoDB;
+
+CREATE TABLE escola.turmas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_disciplinas INT,
+    id_professor INT,
+    id_salas INT,
+    periodo_ano VARCHAR(10),
+    status CHAR(1),
+    CONSTRAINT fk_turma_disciplina FOREIGN KEY (id_disciplinas) REFERENCES escola.disciplinas(id),
+    CONSTRAINT fk_turma_professor FOREIGN KEY (id_professor) REFERENCES escola.professores(matricula_usuario),
+    CONSTRAINT fk_turma_sala FOREIGN KEY (id_salas) REFERENCES escola.salas(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE escola.notas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id_disciplinas INT,
+    id_alunos INT,
+    n1 DECIMAL(4,2),
+    n2 DECIMAL(4,2),
+    n3 DECIMAL(4,2),
+    n4 DECIMAL(4,2),
+    nr DECIMAL(4,2),
+    nf DECIMAL(4,2),
+    status CHAR(1),
+    CONSTRAINT fk_notas_disciplina FOREIGN KEY (id_disciplinas) REFERENCES escola.disciplinas(id),
+    CONSTRAINT fk_notas_aluno FOREIGN KEY (id_alunos) REFERENCES escola.alunos(matricula_usuario)
+) ENGINE=InnoDB;
+
+-- Define o valor inicial do AUTO_INCREMENT para as matrículas
+ALTER TABLE escola.usuarios AUTO_INCREMENT = 1010;
+ALTER TABLE escola.responsaveis AUTO_INCREMENT = 1010;
+ALTER TABLE escola.alunos AUTO_INCREMENT = 1010;
+ALTER TABLE escola.professores AUTO_INCREMENT = 1010;
+
+
+
+========================================================= Trigre
+
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE criar_aluno(
+    IN p_telefone VARCHAR(20),
+    IN p_nome VARCHAR(100),
+    IN p_nas DATE,
+    IN p_cpf VARCHAR(14),
+    IN p_id_sala INT,
+    IN p_id_responsavel INT
+)
+BEGIN
+    DECLARE v_matricula INT;
+
+    INSERT INTO escola.usuarios (tipo, status) VALUES ('A', 'A');
+    SET v_matricula = LAST_INSERT_ID();
+
+    INSERT INTO escola.alunos (matricula_usuario, telefone, nome, nas, cpf, id_sala, id_responsavel)
+    VALUES (v_matricula, p_telefone, p_nome, p_nas, p_cpf, p_id_sala, p_id_responsavel);
+
+    SELECT v_matricula AS matricula_gerada;
+END$$
+
+
+CREATE PROCEDURE criar_professor(
+    IN p_telefone VARCHAR(20),
+    IN p_nome VARCHAR(100),
+    IN p_nas DATE,
+    IN p_cpf VARCHAR(14)
+)
+BEGIN
+    DECLARE v_matricula INT;
+
+    INSERT INTO escola.usuarios (tipo, status) VALUES ('P', 'A');
+    SET v_matricula = LAST_INSERT_ID();
+
+    INSERT INTO escola.professores (matricula_usuario, telefone, nome, nas, cpf)
+    VALUES (v_matricula, p_telefone, p_nome, p_nas, p_cpf);
+
+    SELECT v_matricula AS matricula_gerada;
+END$$
+
+
+CREATE PROCEDURE criar_responsavel(
+    IN p_telefone VARCHAR(20),
+    IN p_nome VARCHAR(100),
+    IN p_nas DATE,
+    IN p_cpf VARCHAR(14)
+)
+BEGIN
+    DECLARE v_matricula INT;
+
+    INSERT INTO escola.usuarios (tipo, status) VALUES ('R', 'A');
+    SET v_matricula = LAST_INSERT_ID();
+
+    INSERT INTO escola.responsaveis (matricula_usuario, telefone, nome, nas, cpf)
+    VALUES (v_matricula, p_telefone, p_nome, p_nas, p_cpf);
+
+    SELECT v_matricula AS matricula_gerada;
+END$$
+
+DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+=========================
+
+
+
+
+
+
+INSERT INTO escola.disciplinas (nome) VALUES
+('Matemática'),
+('Português'),
+('História'),
+('Geografia'),
+('Ciências'),
+('Física'),
+('Química'),
+('Biologia'),
+('Educação Física'),
+('Artes');
+
+
+
+
+-- Salas
+INSERT INTO escola.salas (status, nome) VALUES
+('A', 'Sala 101'),
+('A', 'Sala 102'),
+('I', 'Sala 103');
+
+
+-- Criar professores
+CALL criar_professor('11999990001', 'Carlos Oliveira', '1975-03-12', '123.456.789-00');
+CALL criar_professor('11999990002', 'Fernanda Lima', '1980-06-30', '987.654.321-00');
+
+
+
+INSERT INTO escola.turmas (id_disciplinas, id_professor, id_salas, periodo_ano, status) VALUES
+(1, 1010, 1, '2025-1', 'A'),
+(2, 1011, 2, '2025-1', 'A'),
+(3, 1010, 1, '2025-1', 'A'),
+(4, 1011, 2, '2025-1', 'A');
+
+
+
+CALL criar_responsavel('11990000001', 'Ana Paula Silva', '1975-09-15', '111.222.333-01');
+CALL criar_responsavel('11990000002', 'José Carvalho', '1970-10-20', '111.222.333-02');
+CALL criar_responsavel('11990000003', 'Maria Fernandes', '1982-04-10', '111.222.333-03');
+CALL criar_responsavel('11990000004', 'Carlos Eduardo', '1968-07-25', '111.222.333-04');
+CALL criar_responsavel('11990000005', 'Patrícia Gomes', '1978-01-12', '111.222.333-05');
+CALL criar_responsavel('11990000006', 'Roberto Lima', '1972-03-08', '111.222.333-06');
+CALL criar_responsavel('11990000007', 'Sônia Alves', '1980-11-30', '111.222.333-07');
+CALL criar_responsavel('11990000008', 'Fábio Santos', '1976-06-14', '111.222.333-08');
+CALL criar_responsavel('11990000009', 'Cláudia Ribeiro', '1985-05-21', '111.222.333-09');
+CALL criar_responsavel('11990000010', 'Marcos Souza', '1974-08-17', '111.222.333-10');
+CALL criar_responsavel('11990000011', 'Luciana Martins', '1979-02-03', '111.222.333-11');
+CALL criar_responsavel('11990000012', 'André Dias', '1983-09-27', '111.222.333-12');
+CALL criar_responsavel('11990000013', 'Isabela Costa', '1971-12-05', '111.222.333-13');
+CALL criar_responsavel('11990000014', 'Paulo Ferreira', '1969-04-19', '111.222.333-14');
+CALL criar_responsavel('11990000015', 'Renata Barros', '1984-07-07', '111.222.333-15');
+CALL criar_responsavel('11990000016', 'Ricardo Melo', '1973-10-11', '111.222.333-16');
+CALL criar_responsavel('11990000017', 'Carla Nunes', '1981-03-28', '111.222.333-17');
+CALL criar_responsavel('11990000018', 'Eduardo Pires', '1977-06-06', '111.222.333-18');
+CALL criar_responsavel('11990000019', 'Fernanda Rocha', '1970-01-23', '111.222.333-19');
+CALL criar_responsavel('11990000020', 'Gustavo Almeida', '1975-11-29', '111.222.333-20');
+
+
+
+
+CALL criar_aluno('999990001', 'Lucas Silva', '2012-03-10', '555.666.777-01', 1, 1013);
+CALL criar_aluno('999990002', 'Julia Fernandes', '2011-07-25', '555.666.777-02', 2, 1014);
+CALL criar_aluno('999990003', 'Gabriel Souza', '2013-01-05', '555.666.777-03', 3, 1015);
+CALL criar_aluno('999990004', 'Beatriz Oliveira', '2012-12-12', '555.666.777-04', 1, 1016);
+CALL criar_aluno('999990005', 'Rafael Martins', '2011-09-18', '555.666.777-05', 2, 1017);
+CALL criar_aluno('999990006', 'Mariana Lima', '2013-03-30', '555.666.777-06', 3, 1018);
+CALL criar_aluno('999990007', 'Felipe Carvalho', '2012-06-07', '555.666.777-07', 1, 1019);
+CALL criar_aluno('999990008', 'Amanda Ribeiro', '2011-11-22', '555.666.777-08', 2, 1020);
+CALL criar_aluno('999990009', 'Bruno Dias', '2013-05-14', '555.666.777-09', 3, 1021);
+CALL criar_aluno('999990010', 'Camila Barros', '2012-08-19', '555.666.777-10', 1, 1022);
+CALL criar_aluno('999990011', 'Eduardo Melo', '2011-10-28', '555.666.777-11', 2, 1023);
+CALL criar_aluno('999990012', 'Larissa Nunes', '2013-07-03', '555.666.777-12', 3, 1024);
+CALL criar_aluno('999990013', 'Thiago Pires', '2012-01-15', '555.666.777-13', 1, 1025);
+CALL criar_aluno('999990014', 'Patrícia Rocha', '2011-05-21', '555.666.777-14', 2, 1026);
+CALL criar_aluno('999990015', 'Lucas Almeida', '2013-09-09', '555.666.777-15', 3, 1027);
+CALL criar_aluno('999990016', 'Juliana Costa', '2012-04-01', '555.666.777-16', 1, 1028);
+CALL criar_aluno('999990017', 'Gustavo Ferreira', '2011-12-13', '555.666.777-17', 2, 1029);
+CALL criar_aluno('999990018', 'Fernanda Souza', '2013-06-22', '555.666.777-18', 3, 1030);
+CALL criar_aluno('999990019', 'Ricardo Lima', '2012-09-30', '555.666.777-19', 1, 1031);
+CALL criar_aluno('999990020', 'Marina Santos', '2011-03-17', '555.666.777-20', 2, 1032);
+
+
+INSERT INTO escola.notas (id_disciplinas, id_alunos, n1, n2, n3, n4, nr, nf, status) VALUES
+(1, 1032, 7.5, 8.0, 7.0, 9.0, 7.5, 8.0, 'A'),
+(2, 1033, 6.0, 5.5, 7.0, 6.5, 6.0, 6.2, 'A'),
+(3, 1034, 8.0, 8.5, 9.0, 7.5, 8.5, 8.0, 'A'),
+(4, 1035, 7.0, 7.0, 6.5, 7.5, 7.0, 7.0, 'A'),
+(5, 1036, 9.0, 8.5, 9.5, 9.0, 9.0, 9.2, 'A'),
+(6, 1037, 6.5, 7.0, 6.0, 6.5, 6.5, 6.3, 'A'),
+(7, 1038, 7.5, 7.0, 7.5, 8.0, 7.5, 7.6, 'A'),
+(8, 1039, 8.0, 7.5, 8.5, 8.0, 8.0, 8.1, 'A'),
+(9, 1040, 6.0, 6.5, 7.0, 6.0, 6.3, 6.0, 'A'),
+(10, 1041, 7.0, 7.5, 7.0, 7.0, 7.0, 7.1, 'A'),
+(1, 1042, 8.0, 8.0, 8.5, 8.0, 8.0, 8.3, 'A'),
+(2, 1043, 5.5, 6.0, 6.5, 6.0, 6.0, 5.9, 'A'),
+(3, 1044, 7.5, 8.0, 7.0, 7.5, 7.5, 7.5, 'A'),
+(4, 1045, 6.5, 6.0, 6.5, 7.0, 6.5, 6.4, 'A'),
+(5, 1046, 9.0, 9.5, 9.0, 9.5, 9.0, 9.3, 'A'),
+(6, 1047, 7.0, 6.5, 7.5, 7.0, 7.0, 7.1, 'A'),
+(7, 1048, 8.0, 8.5, 8.0, 8.0, 8.0, 8.2, 'A'),
+(8, 1049, 6.5, 6.0, 6.5, 7.0, 6.5, 6.4, 'A'),
+(9, 1050, 7.5, 7.0, 7.5, 7.5, 7.5, 7.5, 'A');
+
+

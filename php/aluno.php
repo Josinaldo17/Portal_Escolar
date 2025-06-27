@@ -1,17 +1,19 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $firstname = $_POST['firstname'] ?? '';
-    $lastname = $_POST['lastname'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $number = $_POST['number'] ?? '';
-    $password = $_POST['password'] ?? '';
-    $confirmpassword = $_POST['Confirmpassword'] ?? '';
-    $gender = $_POST['gender'] ?? '';
+    if (!empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['email']) && !empty($_POST['number'])) {
+        $firstname = htmlspecialchars($_POST['firstname']);
+        $lastname = htmlspecialchars($_POST['lastname']);
+        $email = htmlspecialchars($_POST['email']);
+        $number = htmlspecialchars($_POST['number']);
 
-        echo "Dados recebidos com sucesso:<br>";
-        echo "Nome: $firstname $lastname<br>";
-        echo "E-mail: $email<br>";
-        echo "Celular: $number<br>";
-        echo "Gênero: $gender<br>";
+        echo "<h1>Aluno Cadastrado:</h1>";
+        echo "<p><strong>Nome:</strong> $firstname $lastname</p>";
+        echo "<p><strong>Email:</strong> $email</p>";
+        echo "<p><strong>Celular:</strong> $number</p>";
+    } else {
+        echo "<h1>Erro: Todos os campos devem ser preenchidos.</h1>";
     }
+} else {
+    echo "<h1>Erro: Método de requisição inválido.</h1>";
+}
 ?>

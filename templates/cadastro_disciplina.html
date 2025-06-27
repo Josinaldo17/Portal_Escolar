@@ -11,7 +11,7 @@
         <img src="../img/imagem4.svg">
     </div>
     <div class="form">
-        <form action="#">
+        <form action="../php/disciplina.php" method="POST">
             <div class="form-header">
                 <div class="title">
                     <h1>Cadastro de Disciplinas</h1>
@@ -20,7 +20,7 @@
             <div class="input-group">
                 <div class="input-box">
                     <label for="name">Nome da disciplina </label>
-                    <input id="name" type="text" placeholder="Digite a disciplina aqui" class="inputs required" oninput="nameValidate()">
+                    <input id="name" name="disciplina" type="text" placeholder="Digite a disciplina aqui" class="inputs required" oninput="nameValidate()">
                     <span class="span-required">Nome deve ter no mínimo 3 caracteres</span>
 
                 </div>
